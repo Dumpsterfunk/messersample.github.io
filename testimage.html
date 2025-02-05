@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Take a Photo</title>
+<style>
+  body {
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  #video {
+    border: 1px solid black;
+    width: 640px;
+    height: 480px;
+  }
+
+  #photo {
+    border: 1px solid black;
+    width: 320px;
+    height: 240px;
+    margin-top: 20px;
+    display: none;
+  }
+
+  #snap {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+  #dalleImage { /* Add styles for the DALL-E generated image */
+    border: 1px solid black;
+    width: 320px;
+    height: 240px;
+    margin-top: 20px;
+    display: none; /* Initially hidden */
+  }
+</style>
+</head>
+<body>
+  <video id="video" autoplay></video>
+  <button id="snap">Take Photo</button>
+  <canvas id="canvas" style="display:none;"></canvas>
+  <img id="photo" src="" alt="The screen capture will appear in this box.">
+  <img id="dalleImage" src="" alt="The DALL-E generated image will appear here.">
+
+  <script>
+    // Grab elements, create settings, etc.
+    var video = document.getElementById('video');
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+    var photo = document.getElementById('photo');
+    var dalleImage = document.getElementById('dalleImage'); // Get the DALL-E image element
+    var snap = document.getElementById('snap');
+    const openaiApiKey = 'YOUR_OPENAI_API_KEY'; // Replace with your actual API key
+
+    // Get access to the device camera.
+    navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function(stream) {
+        video.srcObject = stream;
+      })
+    .catch(function(err) {
+        console.error("Error accessing camera: ", err);
+      });
+
+    function takeSnapshot() {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+      var data = canvas.toDataURL('image/png');
+      photo.setAttribute('src', data);
+      photo.style.display = 'block';
+
+      // Send the image data to DALL-E 3
+      fetch('https://api.openai.com/v1/images/generations', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${openaiApiKey}`
+        },
+        body: JSON.stringify({
+          model: "dall-e-3",
+          prompt: "Generate an image based on this photo",
+          image: data,
+          n: 1,
+          size: "1024x1024"
+        })
+      })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        if (data.data && data.data.length > 0) {
+          dalleImage.setAttribute('src', data.data.url);
+          dalleImage.style.display = 'block'; // Show the DALL-E generated image
+        } else {
+          console.error("No image URL found in DALL-E 3 response.");
+        }
+      })
+    .catch(error => {
+        console.error("Error calling DALL-E 3 API:", error);
+      });
+    }
+
+    // Attach event listeners
+    snap.addEventListener('click', takeSnapshot);
+  </script>
+</body>
+</html>
