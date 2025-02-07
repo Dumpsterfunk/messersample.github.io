@@ -5,124 +5,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <style>
-		a {
-  color: inherit; /* Inherits the color from the parent element */
-  text-decoration: none; /* Removes the underline */
-}
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-a:hover { /* Optional: Style on hover */
-  color: blue; /* Example: Change color to blue on hover */
-  text-decoration: underline; /* Example: Add underline on hover */
-}
-		
+        a:hover {
+            color: blue;
+            text-decoration: underline;
+        }
+
         body {
             font-family: sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #E5E5E1; /* Light background color */
+            background-color: #E5E5E1;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Center horizontally */
-            min-height: 100vh; /* Ensure full viewport height */
+            align-items: center;
+            min-height: 100vh;
         }
 
-        .header {
+      .header {
             width: 100%;
-            background-color: #fff; /* White header */
+            background-color: #fff;
             padding: 20px;
-            text-align: center; /* Center the image */
-            margin-bottom: 20px; /* Space below header */
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        .business-logo {
-            max-width: 200px; /* Adjust as needed */
+      .business-logo {
+            max-width: 200px;
             height: auto;
         }
 
-        .profile-image {
+      .profile-image {
             width: 100px;
             height: 100px;
-            border-radius: 10px; /* Rounded corners */
-            margin-top: 10px; /* Space below business logo */
-            object-fit: cover; /* Prevents image distortion */
-            border: 2px solid #fff; /* White border */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
-			object-fit: contain;
-
+            border-radius: 10px;
+            margin-top: 10px;
+            object-fit: contain; /* Changed to contain */
+            border: 2px solid #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .contact-buttons {
-            display: grid; /* Use grid for two columns */
-            grid-template-columns: repeat(2, 300px); /* Two columns, each 300px wide */
-            gap: 10px; /* Space between buttons */
+      .contact-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
             margin-bottom: 20px;
-            justify-content: center; /* Center the grid */
+            width: calc(80% - 20px);
+            max-width: calc(600px - 20px);
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .contact-button {
-             background-color: #fff;
+      .contact-button {
+            background-color: #fff;
             color: #333;
             border: none;
             padding: 10px 15px;
             border-radius: 5px;
             cursor: pointer;
-            /* display: flex;  REMOVE THIS */
+            display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             transition: background-color 0.3s;
-            width: auto;
+            width: 100%;
             box-sizing: border-box;
-            text-decoration: none; /* Remove underline from link */
-            display: inline-block; /* Make button behave like a block element */
-            width: 80%; /* Make each button full width */
-	    max-width: 600px; /* Match profile-content max-width */
-        }
-	    contact-button {
-            /*... other button styles... */
-            box-sizing: border-box; /* Include padding and border in width */
-            width: 100%; /* Important: Make buttons fill their grid cell */
-	}	    
-
-        .contact-button:hover {
-            background-color: #eee; /* Slightly darker on hover */
+            text-decoration: none;
         }
 
-        .contact-button i {
+      .profile-content {
+            width: 80%;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+      .contact-button:hover {
+            background-color: #ff671b; /* Orange on hover */
+            color: white;
+        }
+
+      .contact-button i {
             margin-right: 5px;
             color: #555;
-			
-        }
-		.contact-button:hover {
-            background-color: #ff671b; /* Light blue background on hover */
-            color: white; /* White text on hover (optional) */
         }
 
       .contact-button:hover i {
-            color: white; /* White icon on hover (optional) */
+            color: white;
         }
 
-        /* Example Styling for the rest of the profile */
-        .profile-content {
-          width: 80%; /* Occupy most of the screen */
-          max-width: 600px; /* But don't get too wide */
-          background-color: white;
-          padding: 20px;
-          border-radius: 10px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      .profile-content h2 {
+            color: #333;
         }
 
-        .profile-content h2 {
-          color: #333;
-        }
-
-        .profile-content p {
-          color: #666; /* Slightly lighter text */
-          line-height: 1.6; /* Improve readability */
+      .profile-content p {
+            color: #666;
+            line-height: 1.6;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 </head>
 <body>
 
@@ -131,19 +119,17 @@ a:hover { /* Optional: Style on hover */
     </div>
 
     <div class="contact-buttons">
-		<a href="tel:+13525758044"><button class="contact-button"><i class="fas fa-phone"></i>Phone</button></a>
-        <button class="contact-button"><i class="fas fa-sms"></i>Text</button>
-        <button class="contact-button"><i class="fas fa-envelope"></i>Email</button>
-		   <button class="contact-button"><i class="fas fa-address-card"></i>Contact Card</button>
-		<button class="contact-button"><i class="fab fa-instagram"></i>Instagram</button>
-		  <button class="contact-button"><i class="fab fa-tiktok"></i>TikTok</button>
-        
-		
+        <a href="tel:+13525758044" class="contact-button"><i class="fas fa-phone"></i>Phone</a>
+        <a href="sms:+13525758044" class="contact-button"><i class="fas fa-sms"></i>Text</a>
+        <a href="mailto:your_email@example.com" class="contact-button"><i class="fas fa-envelope"></i>Email</a>
+        <a href="#" class="contact-button"><i class="fas fa-address-card"></i>Contact Card</a>
+        <a href="https://www.instagram.com/your_instagram" target="_blank" class="contact-button"><i class="fab fa-instagram"></i>Instagram</a>
+        <a href="https://www.tiktok.com/@your_tiktok" target="_blank" class="contact-button"><i class="fab fa-tiktok"></i>TikTok</a>
     </div>
 
     <div class="profile-content">
         <h2>Your Name or Business Name</h2>
-        <p>Some information about you or your business.  You can add multiple paragraphs here.  Describe your services, your mission, or anything else you want visitors to know.</p>
+        <p>Some information about you or your business. You can add multiple paragraphs here. Describe your services, your mission, or anything else you want visitors to know.</p>
 
         <p>More details can go here.</p>
     </div>
