@@ -52,32 +52,48 @@ a:hover { /* Optional: Style on hover */
         }
 
         .contact-buttons {
-            display: flex;
-            flex-wrap: wrap; /* Allow buttons to wrap */
-            justify-content: center; /* Center the buttons */
+            display: grid; /* Use grid for two columns */
+            grid-template-columns: repeat(2, 300px); /* Two columns, each 300px wide */
             gap: 10px; /* Space between buttons */
-            margin-bottom: 20px; /* Space below buttons */
+            margin-bottom: 20px;
+            justify-content: center; /* Center the grid */
         }
 
         .contact-button {
-            background-color: #fff;
-            color: #333; /* Dark text color */
+             background-color: #fff;
+            color: #333;
             border: none;
             padding: 10px 15px;
             border-radius: 5px;
             cursor: pointer;
-            display: flex; /* Use flexbox for icon and text */
-            align-items: center; /* Vertically align icon and text */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
-            transition: background-color 0.3s; /* Smooth transition */
+            /* display: flex;  REMOVE THIS */
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
+            width: auto;
+            box-sizing: border-box;
+            text-decoration: none; /* Remove underline from link */
+            display: inline-block; /* Make button behave like a block element */
+            width: 100%; /* Make each button full width */
         }
 
         .contact-button:hover {
             background-color: #eee; /* Slightly darker on hover */
         }
 
-        .contact-button i { /* Style the icon */
-            margin-right: 5px; /* Space between icon and text */
+        .contact-button i {
+            margin-right: 5px;
+            color: #555;
+			
+        }
+		.contact-button:hover {
+            background-color: #ff671b; /* Light blue background on hover */
+            color: white; /* White text on hover (optional) */
+        }
+
+      .contact-button:hover i {
+            color: white; /* White icon on hover (optional) */
         }
 
         /* Example Styling for the rest of the profile */
@@ -109,12 +125,14 @@ a:hover { /* Optional: Style on hover */
     </div>
 
     <div class="contact-buttons">
-        <button class="contact-button"><i class="fas fa-phone"></i><a href="tel:+13525758044">Phone</a></button>
+		<a href="tel:+13525758044"><button class="contact-button"><i class="fas fa-phone"></i>Phone</button></a>
         <button class="contact-button"><i class="fas fa-sms"></i>Text</button>
-        <button class="contact-button"><i class="fab fa-instagram"></i>Instagram</button>
         <button class="contact-button"><i class="fas fa-envelope"></i>Email</button>
-        <button class="contact-button"><i class="fas fa-address-card"></i>Contact Card</button>
-        <button class="contact-button"><i class="fab fa-tiktok"></i>TikTok</button>
+		   <button class="contact-button"><i class="fas fa-address-card"></i>Contact Card</button>
+		<button class="contact-button"><i class="fab fa-instagram"></i>Instagram</button>
+		  <button class="contact-button"><i class="fab fa-tiktok"></i>TikTok</button>
+        
+		
     </div>
 
     <div class="profile-content">
